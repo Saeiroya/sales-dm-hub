@@ -1,0 +1,27 @@
+{
+  "name": "sales-dm-hub",
+  "version": "1.0.0",
+  "description": "Professional Instagram DM sales automation for Iranian businesses",
+  "main": "src/server.js",
+  "type": "commonjs",
+  "scripts": {
+    "dev": "node src/server.js",
+    "start": "node src/server.js"
+  },
+  "keywords": [
+    "instagram",
+    "automation",
+    "sales",
+    "crm",
+    "dm",
+    "iran"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.6.1",
+    "express": "^5.2.1",
+    "pg": "^8.16.3",
+    "uuid": "^11.1.0"
+  }
+}
