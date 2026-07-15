@@ -1,34 +1,16 @@
 const express = require('express');
 const webhookRoutes = require('./routes/webhook.routes');
-const healthRoutes = require('./routes/health.routes');
+const requestContextMiddleware = require('./middlewares/request-context.middleware');
+const errorHandlerMiddleware = require('./middlewares/error-handler.middleware');
 
 const app = express();
 
-app.use(express.json({ limit: '1mb' }));
+app.use(express.json());
 
-app.get('/', (req, res) => {
-  res.status(200).json({
-    success: true,
-    message: 'sales-dm-hub API is running',
-  });
-});
+app.use(requestContextMiddleware);
 
-app.use('/health', healthRoutes);
 app.use('/webhook', webhookRoutes);
 
-app.use((req, res) => {
-  res.status(404).json({
-    success: false,
-    message: 'Route not found',
-  });
-});
-
-app.use((err, req, res, next) => {
-  console.error('Unhandled app error:', err);
-  res.status(500).json({
-    success: false,
-    message: 'Internal server error',
-  });
-});
+app.use(errorHandlerMiddleware);
 
 module.exports = app;
